@@ -56,28 +56,27 @@
                         </h4>
 
                         <span class="mtext-106 cl2">
-                            $58.79
+                            58.790.000đ
                         </span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                            Mô tả: Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
                         </p>
 
                         <!--  -->
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
-                                    Size
+                                    Kích thước:
                                 </div>
 
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="time">
                                             <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
+                                            <option>Lớn</option>
+                                            <option>Nhỏ</option>
+                                            <option>Vừa</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -86,7 +85,7 @@
 
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-203 flex-c-m respon6">
-                                    Color
+                                    Màu
                                 </div>
 
                                 <div class="size-204 respon6-next">
@@ -118,7 +117,7 @@
                                     </div>
 
                                     <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
+                                        Thêm vào giỏ hàng
                                     </button>
                                 </div>
                             </div>

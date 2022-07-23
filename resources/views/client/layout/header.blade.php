@@ -18,11 +18,11 @@
                     </a>
 
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Đăng Kí
+                        Contact
                     </a>
 
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Đăng Nhập
+                    <a href="{{route('dang-nhap/dang-ki')}}" class="flex-c-m trans-04 p-lr-25">
+                        Đăng Nhập/Đăng kí
                     </a>
                 </div>
             </div>
@@ -40,23 +40,23 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="active-menu">
-                            <a href="index.html">Trang Chủ</a>
+                            <a href="{{route('/')}}">Trang Chủ</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Sản Phẩm</a>
+                            <a href="{{route('san-pham')}}">Sản Phẩm</a>
                         </li>
 
                         <li class="label1" data-label1="hot">
-                            <a href="shoping-cart.html">Giỏ Hàng</a>
+                            <a href="{{route('gio-hang')}}">Giỏ Hàng</a>
                         </li>
 
                         <li>
-                            <a href="blog.html">Tin Tức</a>
+                            <a href="{{route('tin-tuc')}}">Tin Tức</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Liên Hệ</a>
+                            <a href="{{route('lien-he')}}">Liên Hệ</a>
                         </li>
                     </ul>
                 </div>

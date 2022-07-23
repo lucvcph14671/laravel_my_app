@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="{{ asset('client/images/icons/favicon.png') }}" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('client/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('client/css/loginsignin.css') }}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('client/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
@@ -157,6 +158,7 @@
     </script>
     	<!--===============================================================================================-->
     <script src="{{ asset('client/js/main.js') }}"></script>
+    <script src="{{ asset('client/js/login-signin.js') }}"></script>
 
 </body>
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // Trang chủ
+        return view('client.products.listProduct', [
+
+        ]);
     }
+
+    public function product()
+    {
+        // Trang sản phẩm
+        return view('client.products.listProduct', [
+
+        ]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function blog()
     {
-        //
+        // Trang sản phẩm
+        return view('client.blog.blogHome', [
+
+        ]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
