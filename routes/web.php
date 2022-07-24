@@ -36,6 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('san-pham.html', [HomeController::class, 'product'])->name('san-pham');
 
+    Route::get('san-pham-chi-tiet.html', [HomeController::class, 'productDetail'])->name('san-pham-chi-tiet');
+
     Route::get('gio-hang.html', [CartController::class, 'cart'])->name('gio-hang');
 
     Route::get('tin-tuc.html', [BlogController::class, 'blog'])->name('tin-tuc');

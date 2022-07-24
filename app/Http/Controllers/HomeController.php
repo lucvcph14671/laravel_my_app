@@ -27,6 +27,14 @@ class HomeController extends Controller
         ]);
     }
     
+    public function productDetail() {
+
+        //trang sản phảm chi tiet
+        return view('client.products.detailProduct', [
+
+        ]);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
