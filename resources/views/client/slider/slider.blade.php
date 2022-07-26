@@ -1,7 +1,7 @@
 <section class="section-slide m-t-80">
     <div class="wrap-slick1">
         <div class="slick1">
-            <div class="item-slick1" style="background-image: url(https://anlocgroup.com/wp-content/uploads/2018/09/noi-that-nha-pho-ha-dong-1.jpg);">
+            <div class="item-slick1" style="background-image: url(https://3.bp.blogspot.com/-rQGZcEAZWZI/WdUEQXPvy1I/AAAAAAAACFg/tpQcrcTdNUA7zJrh6mXo2LahTF-Gc1CEwCLcBGAs/s1600/thi-cong-noi-that-phong-khach-noi-that-my-tran.jpg);">
                 <div class="container h-full">
                     <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                         <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">

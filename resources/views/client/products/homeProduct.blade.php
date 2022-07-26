@@ -1,8 +1,15 @@
 @extends('clientMaster')
-@section('title', 'Sản phẩm Coza Store')
+@section('title', 'Trang chủ Coza Store')
 @section('content')
 
-    <section class="bg0 m-t-80">
+
+    <!-- Slider -->
+    @include('../client/slider/slider')
+
+    <!-- Banner -->
+    @include('../client/banner/banner')
+
+    <section class="bg0 p-t-23">
         <div class="container">
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">

@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         // Trang chủ
-        return view('client.products.listProduct', [
+        return view('client.products.homeProduct', [
 
         ]);
     }
