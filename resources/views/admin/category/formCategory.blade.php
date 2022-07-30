@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-body">
                             <input type="text" name="title" class="form-control"
-                                value="{{ isset($categoryProductId) ? $categoryProductId->title : old('$title') }}"
+                                value="{{ isset($categoryProductId) ? $categoryProductId->title : old('title') }}"
                                 placeholder="Nhập tên danh mục">
                             @if ($errors->has('title'))
                                 <span class="text-danger text-sm"> {{ $errors->first('title') }}</span>
@@ -52,7 +52,7 @@
                                         Hiện danh mục
                                     </span>
                                 </label>
-                                @if ($errors->has('title'))
+                                @if ($errors->has('status'))
                                     <span class="text-danger text-sm"> {{ $errors->first('status') }}</span>
                                 @endif
                             </div>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="card-body">
                             <input class="form-control" type="file" name="image">
-                            @if ($errors->has('title'))
+                            @if ($errors->has('image'))
                                 <span class="text-danger text-sm"> {{ $errors->first('image') }}</span>
                             @endif
                             <img src="{{ isset($categoryProductId) ? asset($categoryProductId->image) : '' }}"

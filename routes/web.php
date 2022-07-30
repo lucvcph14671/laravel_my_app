@@ -3,11 +3,13 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +31,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('list-user', [UserController::class, 'listUser'])->name('list-user');
+
+    });
+
+    Route::prefix('color')->name('color.')->group(function () {
+        
+        Route::get('form-color', [ColorController::class, 'formColor'])->name('form-color');
+        Route::get('add-color', [ColorController::class, 'addColor'])->name('add-color');
+
+    });
+
+    Route::prefix('size')->name('size.')->group(function () {
+        
+        Route::get('form-size', [SizeController::class, 'formSize'])->name('form-size');
+        Route::post('add-size', [SizeController::class, 'addSize'])->name('add-size');
+        Route::delete('destroy-size/{id}', [SizeController::class, 'destroy'])->name('destroy-size');
 
     });
     

@@ -50,18 +50,18 @@
             </li>
 
             <li class="sidebar-header">
-                Plugins & Addons
+                Màu & Kích thước
             </li>
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="charts-chartjs.html">
-                    <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
+                <a class="sidebar-link" href="{{route('admin.color.form-color')}}">
+                    <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Màu</span>
                 </a>
             </li>
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="maps-google.html">
-                    <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                <a class="sidebar-link" href="{{route('admin.size.form-size')}}">
+                    <i class="align-middle" data-feather="map"></i> <span class="align-middle">Kích thước</span>
                 </a>
             </li>
 
