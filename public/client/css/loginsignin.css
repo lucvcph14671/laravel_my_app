@@ -191,7 +191,7 @@ input::placeholder {
     -ms-flex-pack: justify;
     justify-content: space-between;
     width: 100%;
-    background-color: rgba(34, 34, 34, 0.85);
+    background-color: rgb(34 34 34);
     border-radius: 3px;
 }
 

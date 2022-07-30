@@ -80,4 +80,22 @@ class ProductController extends Controller
     {
         //
     }
+
+    /// Admin quản lí
+
+    public function listProduct()
+    {
+        return view('admin.product.listProduct', [
+            
+        ]);
+    }
+
+
+    // from sản phẩm thêm sửa
+    public function fromProduct()
+    {
+        return view('admin.product.formProduct', [
+            
+        ]);
+    }
 }

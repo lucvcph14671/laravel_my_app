@@ -13,9 +13,7 @@ class UserController extends Controller
      */
     public function loginSignin()
     {
-        return view('auth.loginSignin', [
-            
-        ]);
+        return view('auth.loginSignin', []);
     }
 
     /**
@@ -82,5 +80,19 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /// Admin quản lí
+
+    public function profile()
+    {
+        return view('admin.user.profile', []);
+    }
+
+    /// Danh sách tài khoản
+
+    public function listUser()
+    {
+        return view('admin.user.listUser', []);
     }
 }

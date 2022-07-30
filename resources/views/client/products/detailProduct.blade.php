@@ -32,22 +32,22 @@
                             <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                             <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="{{asset('client/images/product-detail-01.jpg')}}">
+                                <div class="item-slick3" data-thumb="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="{{asset('client/images/product-detail-01.jpg')}}" alt="IMG-PRODUCT">
+                                        <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="{{asset('client/images/product-detail-01.jpg')}}">
+                                            href="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="item-slick3" data-thumb="{{asset('client/images/product-detail-01.jpg')}}">
+                                <div class="item-slick3" data-thumb="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="{{asset('client/images/product-detail-01.jpg')}}" alt="IMG-PRODUCT">
+                                        <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg" alt="IMG-PRODUCT">
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="{{asset('client/images/product-detail-01.jpg')}}">
+                                            href="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -191,14 +191,7 @@
                         <div class="tab-pane fade show active" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
                                 <p class="stext-102 cl6">
-                                    Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit
-                                    amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus
-                                    interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et
-                                    elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu
-                                    velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec
-                                    iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat,
-                                    purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus
-                                    rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                                    Chưa có.
                                 </p>
                             </div>
                         </div>
@@ -210,7 +203,7 @@
                                     <ul class="p-lr-28 p-lr-15-sm">
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Weight
+                                                Cân Nặng
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
@@ -220,7 +213,7 @@
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Dimensions
+                                                Rộng
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
@@ -230,17 +223,17 @@
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Materials
+                                                Chất liệu
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                60% cotton
+                                                Củi khô
                                             </span>
                                         </li>
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Color
+                                                Màu
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
@@ -250,11 +243,11 @@
 
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Size
+                                                Kích thước
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
-                                                XL, L, M, S
+                                                Lớn, Vừa, Nhỏ
                                             </span>
                                         </li>
                                     </ul>
@@ -381,7 +374,7 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
-                                <img src="{{asset('client/images/product-01.jpg')}}" alt="IMG-PRODUCT">
+                                <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg" alt="IMG-PRODUCT">
 
                                 <a href="#"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">

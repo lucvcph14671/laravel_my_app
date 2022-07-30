@@ -7,20 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
     <meta name="author" content="AdminKit">
-    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <meta name="keywords"
+        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="{{asset('img/icons/icon-48x48.png')}}" />
+    <link rel="shortcut icon" href="{{ asset('client/images/icons/favicon.png') }}" />
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
     <title>@yield('title')</title>
 
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('client/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/loadding.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 </head>
 
 <body>
+    <div class="loader-container">
+        <p class="loader"></p>
+    </div>
+
     <div class="wrapper">
         @include('../admin/layout/sidebar')
 
@@ -38,7 +53,7 @@
         </div>
     </div>
 
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -50,7 +65,9 @@
             new Chart(document.getElementById("chartjs-dashboard-line"), {
                 type: "line",
                 data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+                        "Dec"
+                    ],
                     datasets: [{
                         label: "Sales ($)",
                         fill: true,
@@ -144,7 +161,9 @@
             new Chart(document.getElementById("chartjs-dashboard-bar"), {
                 type: "bar",
                 data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+                        "Dec"
+                    ],
                     datasets: [{
                         label: "This year",
                         backgroundColor: window.theme.primary,
@@ -251,7 +270,51 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        $(window).on("load", function() {
+            $(".loader-container").fadeOut("slow");
+        });
+    </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+
+            var form = $(this).closest("form");
+
+            var name = $(this).data("name");
+
+            event.preventDefault();
+
+            swal({
+
+                    title: `Bạn có chắc chắn muốn xóa bản ghi này không?`,
+
+                    text: "Nếu bạn xóa nó, nó sẽ biến mất vĩnh viễn.",
+
+                    icon: "warning",
+
+                    buttons: true,
+
+                    dangerMode: true,
+
+                })
+
+                .then((willDelete) => {
+
+                    if (willDelete) {
+
+                        form.submit();
+
+                    }
+
+                });
+
+        });
+    </script>
 </body>
 
 </html>

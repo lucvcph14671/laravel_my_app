@@ -1,5 +1,5 @@
 @extends('adminMaster')
-@section('title', 'AdminKit - Bootstrap Admin Template')
+@section('title', 'Admin - Trang Quản lí Admin Disnep')
 @section('content')
     <div class="container-fluid p-0">
 
