@@ -2,20 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class AuthController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function login(AuthRequest $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
 
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+
+            return redirect()->route('admin./');
+        }
+
+        return redirect()->route('/dang-nhap/dang-ki');
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loginSignin()
+    {
+        return view('auth.loginSignin', []);
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function logout(Request $request)
     {
-        //
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+     
+        $request->session()->regenerateToken();
+     
+        return redirect()->route('/dang-nhap/dang-ki');
     }
 
     /**
@@ -72,19 +107,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /// Admin quản lí
-
-    public function profile()
-    {
-        return view('admin.user.profile', []);
-    }
-
-    /// Danh sách tài khoản
-
-    public function listUser()
-    {
-        return view('admin.user.listUser', []);
     }
 }

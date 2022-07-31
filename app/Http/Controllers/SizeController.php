@@ -51,28 +51,7 @@ class SizeController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
 
 
@@ -95,7 +74,7 @@ class SizeController extends Controller
         $size->fill($request->all());
 
         $size->save();
-        return back();
+        return redirect()->back()->with('messenger','Thêm mới thành công');
     }
 
         /**
@@ -110,10 +89,44 @@ class SizeController extends Controller
 
             if( Size::destroy($id) ){
 
-                return back();
+                return redirect()->back()->with('messenger','Xóa thành công');
             }
             
         }
+    }
+
+
+        /** form edit size
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        return view('admin.sizeAndcolor.size',[
+            'size' => Size::paginate(3),
+            'data_size' => Size::find($id),
+        ]);
+    }
+
+
+
+        /**
+         * update size
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(SizeRequest $request, $id)
+    {
+        $size = Size::find($id);
+        $size->fill($request->all());
+
+        $size->save();
+        return redirect()->back()->with('messenger','Sửa thành công');
     }
 }
 

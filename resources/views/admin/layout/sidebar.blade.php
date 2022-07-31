@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
-            <span class="align-middle">Admin Disnep</span>
+        <a class="sidebar-brand" >
+            <span class="align-middle text-info">Admin Disnep</span>
         </a>
 
         <ul class="sidebar-nav">
@@ -66,7 +66,7 @@
             </li>
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-sign-in.html">
+                <a class="sidebar-link" href="{{route('dang-xuat')}}">
                     <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Đăng xuất</span>
                 </a>
             </li>

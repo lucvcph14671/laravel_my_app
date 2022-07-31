@@ -21,7 +21,7 @@
                         Contact
                     </a>
 
-                    <a href="{{route('dang-nhap/dang-ki')}}" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{route('/dang-nhap/dang-ki')}}" class="flex-c-m trans-04 p-lr-25">
                         Đăng Nhập/Đăng kí
                     </a>
                 </div>

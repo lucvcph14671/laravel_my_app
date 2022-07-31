@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
    
     Route::get('/', [dashboardController::class, 'index'])->name('/');
 
@@ -46,6 +47,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('form-size', [SizeController::class, 'formSize'])->name('form-size');
         Route::post('add-size', [SizeController::class, 'addSize'])->name('add-size');
         Route::delete('destroy-size/{id}', [SizeController::class, 'destroy'])->name('destroy-size');
+        Route::get('edit-size/{id}', [SizeController::class, 'edit'])->name('edit-size');
+        Route::put('update-size/{id}', [SizeController::class, 'update'])->name('update-size');
 
     });
     
@@ -82,9 +85,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('lien-he', [ContactController::class, 'contact'])->name('lien-he');
 
-    Route::get('dang-nhap/dang-ki', [UserController::class, 'loginSignin'])->name('dang-nhap/dang-ki');
+    Route::middleware('guest')->prefix('/')->name('/')->group(function () {
 
-    // Route::prefix('/')->name('/')->group(function () {
-    //     Route::get('list', [UserController::class, 'index'])->name('list');
-    // });
+        Route::get('dang-nhap/dang-ki', [AuthController::class, 'loginSignin'])->name('dang-nhap/dang-ki');
+        Route::post('dang-nhap', [AuthController::class, 'login'])->name('dang-nhap');
+        
+    });
+
+    Route::get('dang-xuat', [AuthController::class, 'logout'])->name('dang-xuat')->middleware('auth');
 

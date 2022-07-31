@@ -1,16 +1,36 @@
 @extends('adminMaster')
-@section('title', 'Thêm kích thước mới.')
+@section('title', 'Thêm/sửa kích thước mới.')
 @section('content')
     <div class="container-fluid p-0">
 
         <div class="mb-3">
-            <h1 class="h3 d-inline align-middle">Khích thước</h1>
+            <h1 class="h3 d-inline align-middle">Kích thước</h1>
             <a class="badge bg-dark text-white ms-2">
                 Thêm kích thước mới
             </a>
+            @if (Session::has('messenger'))
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                        <use xlink:href="#check-circle-fill" />
+                    </svg>
+                    <div>
+                        {{ Session::get('messenger') }}
+                        @php
+                            Session::forget('messenger');
+                        @endphp
+                    </div>
+                </div>
+            @endif
+
         </div>
-        <form action="{{ route('admin.size.add-size') }}" method="post">
+
+        <form
+            action="{{ isset($data_size) ? route('admin.size.update-size', $data_size->id) : route('admin.size.add-size') }}"
+            method="post">
             @csrf
+            @if (isset($data_size))
+                @method('PUT')
+            @endif
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="card flex-fill w-100">
@@ -21,7 +41,7 @@
                             <div class="chart">
                                 <h5 class="card-title mb-0">Loại khích cỡ</h5>
                                 <input type="text" name="name" class="form-control mt-2"
-                                    value="{{ isset($categoryProductId) ? $categoryProductId->title : old('name') }}"
+                                    value="{{ isset($data_size) ? $data_size->name : old('name') }}"
                                     placeholder="Nhập khích cỡ">
                                 @if ($errors->has('name'))
                                     <span class="text-danger text-sm"> {{ $errors->first('name') }}</span>
@@ -35,6 +55,7 @@
                                         <div>
                                             <label class="form-check">
                                                 <input class="form-check-input" type="radio" value="0"
+                                                    @checked($data_size->status === 0)
                                                     name="status">
                                                 <span class="form-check-label">
                                                     Ẩn size
@@ -42,6 +63,7 @@
                                             </label>
                                             <label class="form-check">
                                                 <input class="form-check-input" type="radio" value="1"
+                                                @checked($data_size->status === 1)
                                                     name="status">
                                                 <span class="form-check-label">
                                                     Hiện size
@@ -77,9 +99,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($size as $index=>$item)
+                        @foreach ($size as $index => $item)
                             <tr>
-                                <td>{{ $index+1 }}</td>
+                                <td>{{ $index + 1 }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td class="d-none d-xl-table-cell">{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                 <td>
@@ -98,7 +120,7 @@
                                         </button>
                                     </form>
                                     <a class="badge bg-success border border-success text-decoration-none"
-                                        href="">Sửa</a>
+                                        href="{{ route('admin.size.edit-size', $item->id) }}">Sửa</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -109,4 +131,5 @@
     </div>
 
     </div>
+
 @endsection
