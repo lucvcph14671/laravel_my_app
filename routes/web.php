@@ -38,7 +38,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::prefix('color')->name('color.')->group(function () {
         
         Route::get('form-color', [ColorController::class, 'formColor'])->name('form-color');
-        Route::get('add-color', [ColorController::class, 'addColor'])->name('add-color');
+        Route::post('add-color', [ColorController::class, 'addColor'])->name('add-color');
+        Route::delete('destroy-color/{id}', [ColorController::class, 'destroy'])->name('destroy-color');
+        Route::get('edit-color/{id}', [ColorController::class, 'edit'])->name('edit-color');
+        Route::put('update-color/{id}', [ColorController::class, 'update'])->name('update-color');
 
     });
 

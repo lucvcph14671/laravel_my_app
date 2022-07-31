@@ -55,7 +55,7 @@
                                         <div>
                                             <label class="form-check">
                                                 <input class="form-check-input" type="radio" value="0"
-                                                    @checked($data_size->status === 0)
+                                                {{ isset($data_size) && $data_size->status === 0 ? 'checked' : '' }}
                                                     name="status">
                                                 <span class="form-check-label">
                                                     Ẩn size
@@ -63,7 +63,7 @@
                                             </label>
                                             <label class="form-check">
                                                 <input class="form-check-input" type="radio" value="1"
-                                                @checked($data_size->status === 1)
+                                                {{ isset($data_size) && $data_size->status === 1 ? 'checked' : '' }}
                                                     name="status">
                                                 <span class="form-check-label">
                                                     Hiện size
