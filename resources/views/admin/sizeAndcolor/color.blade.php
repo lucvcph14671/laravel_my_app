@@ -77,13 +77,13 @@
                                 </div>
                                 <h5 class="card-title mb-0">Mã màu</h5>
                                 <input type="text" name="color_code" class="form-control mt-2"
-                                    value="{{ isset($data_color) ? $data_color->name : old('color_code') }}"
+                                    value="{{ isset($data_color) ? $data_color->color_code : old('color_code') }}"
                                     placeholder="VD: #fffff">
                                 @if ($errors->has('color_code'))
                                     <span class="text-danger text-sm"> {{ $errors->first('color_code') }}</span>
                                 @endif
                             </div>
-                            <button class="btn btn-info mt-4" type="submit">Thêm ngay</button>
+                            <button class="btn btn-info mt-4" type="submit">Lưu</button>
                         </div>
                     </div>
                 </div>
@@ -110,14 +110,18 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td><span class="rounded p-1" style="background: {{ $item->color_code }}">{{ $item->color_code }}</span></td>
+                                <td><span class="rounded p-1"
+                                        style="background: {{ $item->color_code }}">{{ $item->color_code }}</span></td>
                                 <td class="d-none d-xl-table-cell">{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                 <td>
-                                    @if ($item->status === 1)
-                                        <span class="badge bg-info">Hiện</span>
-                                    @else
-                                        <span class="badge bg-warning">Tạm ẩn</span>
-                                    @endif
+                                    <form action="{{route('admin.update_status',$item->id)}}" method="post">
+                                        @csrf
+                                        @if ($item->status === 1)
+                                            <button class="badge bg-info" name="status" value="{{$item->status}}">Hiện</button>
+                                        @else
+                                            <button class="badge bg-warning">Tạm ẩn</button>
+                                        @endif
+                                    </form>
                                 </td>
                                 <td>
                                     <form action="{{ route('admin.color.destroy-color', $item->id) }}" method="POST">
@@ -134,7 +138,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mt-4 ml-2">
+                    {{ $color->links() }}
+                </div>
             </div>
+
         </div>
     </div>
 

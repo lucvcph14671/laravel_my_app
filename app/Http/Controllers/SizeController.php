@@ -74,7 +74,7 @@ class SizeController extends Controller
         $size->fill($request->all());
 
         $size->save();
-        return redirect()->back()->with('messenger','Thêm mới thành công');
+        return redirect()->route('admin.size.form-size')->with('messenger','Thêm mới thành công');
     }
 
         /**
@@ -89,7 +89,7 @@ class SizeController extends Controller
 
             if( Size::destroy($id) ){
 
-                return redirect()->back()->with('messenger','Xóa thành công');
+                return redirect()->route('admin.size.form-size')->with('messenger','Xóa thành công');
             }
             
         }
@@ -126,7 +126,7 @@ class SizeController extends Controller
         $size->fill($request->all());
 
         $size->save();
-        return redirect()->back()->with('messenger','Sửa thành công');
+        return redirect()->route('admin.size.form-size')->with('messenger','Sửa thành công');
     }
 }
 

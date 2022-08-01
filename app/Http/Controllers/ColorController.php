@@ -57,7 +57,7 @@ class ColorController extends Controller
     public function formColor(){
 
         return view('admin.sizeAndcolor.color',[
-            'color' => Color::paginate(3),
+            'color' => Color::paginate(4),
         ]);
     }
 
@@ -71,7 +71,7 @@ class ColorController extends Controller
         $color->fill($request->all());
 
         $color->save();
-        return redirect()->back()->with('messenger','Thêm mới thành công');
+        return redirect()->route('admin.color.form-color')->with('messenger','Thêm mới thành công');
     }
 
         /**
@@ -86,7 +86,7 @@ class ColorController extends Controller
 
             if( Color::destroy($id) ){
 
-                return redirect()->back()->with('messenger','Xóa thành công');
+                return redirect()->route('admin.color.form-color')->with('messenger','Xóa thành công');
             }
             
         }
@@ -102,7 +102,7 @@ class ColorController extends Controller
     public function edit($id)
     {
         return view('admin.sizeAndcolor.color',[
-            'color' => Color::paginate(3),
+            'color' => Color::paginate(4),
             'data_color' => Color::find($id),
         ]);
     }
@@ -123,6 +123,6 @@ class ColorController extends Controller
         $color->fill($request->all());
 
         $color->save();
-        return redirect()->back()->with('messenger','Sửa thành công');
+        return redirect()->route('admin.color.form-color')->with('messenger','Sửa thành công');
     }
 }

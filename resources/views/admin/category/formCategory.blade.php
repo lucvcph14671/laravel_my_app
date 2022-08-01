@@ -64,12 +64,13 @@
                             <h5 class="card-title mb-0">Ảnh</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="file" name="image">
+                            <input class="form-control image-preview" onchange="previewfile(this)" type="file"
+                                name="image">
                             @if ($errors->has('image'))
                                 <span class="text-danger text-sm"> {{ $errors->first('image') }}</span>
                             @endif
                             <img src="{{ isset($categoryProductId) ? asset($categoryProductId->image) : '' }}"
-                                alt="" width="100">
+                                class="pt-2" id="previewImg" alt="" width="100">
                         </div>
 
                     </div>

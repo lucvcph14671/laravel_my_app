@@ -28,6 +28,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
    
     Route::get('/', [dashboardController::class, 'index'])->name('/');
 
+    Route::put('update_status/{id}', [AuthController::class, 'update_status'])->name('update_status');
+
     Route::prefix('user')->name('user.')->group(function () {
         
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
@@ -59,7 +61,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         
         Route::get('list-product', [ProductController::class, 'listProduct'])->name('list-product');
         Route::get('form-product', [ProductController::class, 'fromProduct'])->name('form-product');
-        Route::get('category-product', [CategoryController::class, 'fromProduct'])->name('category-product');
+        Route::post('add-product', [ProductController::class, 'addProduct'])->name('add-product');
 
     });
 

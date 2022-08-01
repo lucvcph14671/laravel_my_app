@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-info mt-4" type="submit">Thêm ngay</button>
+                                <button class="btn btn-info mt-4" type="submit">Lưu</button>
                             </div>
                         </div>
                     </div>
@@ -126,6 +126,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mt-4 ml-2">
+                    {{ $size->links() }}
+                </div>
             </div>
         </div>
     </div>
