@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\AuthRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -23,7 +26,7 @@ class AuthController extends Controller
             return redirect()->route('admin./');
         }
 
-        return redirect()->route('/dang-nhap/dang-ki');
+        return redirect()->route('/form-dang-nhap');
     }
 
 
@@ -32,9 +35,19 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function loginSignin()
+    public function formLogin()
     {
-        return view('auth.loginSignin', []);
+        return view('auth.login', []);
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function formSignin()
+    {
+        return view('auth.signin', []);
     }
 
     /**
@@ -50,7 +63,7 @@ class AuthController extends Controller
      
         $request->session()->regenerateToken();
      
-        return redirect()->route('/dang-nhap/dang-ki');
+        return redirect()->route('/form-dang-nhap');
     }
 
     /**
@@ -59,9 +72,17 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function signin(AddUserRequest $request)
     {
-        //
+        $user = new User();
+
+        $user->fill($request->all());
+        $user->password = Hash::make($request->password);
+        $user->image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRCFgHuWIBCleFnK0U9Hytp0Q76Ygu1alwrQ&usqp=CAU';
+
+        $user->save();
+        return redirect()->route('/form-dang-nhap')->with('messenger','Đăng kí tài khoản thành công.');
+        
     }
 
     /**

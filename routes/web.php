@@ -92,8 +92,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('guest')->prefix('/')->name('/')->group(function () {
 
-        Route::get('dang-nhap/dang-ki', [AuthController::class, 'loginSignin'])->name('dang-nhap/dang-ki');
+        Route::get('form-dang-ki', [AuthController::class, 'formSignin'])->name('form-dang-ki');
+        Route::get('form-dang-nhap', [AuthController::class, 'formlogin'])->name('form-dang-nhap');
         Route::post('dang-nhap', [AuthController::class, 'login'])->name('dang-nhap');
+        Route::post('dang-ki', [AuthController::class, 'signin'])->name('dang-ki');
         
     });
 

@@ -6,20 +6,28 @@
             <div class="user_options-text">
                 <div class="user_options-unregistered">
                     <h2 class="user_unregistered-title">Bạn chưa có tài khoản?</h2>
-                    <p class="user_unregistered-text">Tạo tài khoản mới nào!</p>
-                    <button class="user_unregistered-signup" id="signup-button">Đăng kí ngay</button>
-                </div>
-
-                <div class="user_options-registered">
-                    <h2 class="user_registered-title">Bạn đã có tài khoản!</h2>
-                    <p class="user_registered-text">Hãy bắt đầu..</p>
-                    <button class="user_registered-login" id="login-button">Đăng nhập ngay</button>
+                    <p class="user_unregistered-text py-5">Tạo tài khoản mới nào!</p>
+                    <a class="user_unregistered-signup" href="{{ route('/form-dang-ki') }}" id="signup-button">Đăng kí ngay</a>
                 </div>
             </div>
 
             <div class="user_options-forms" id="user_options-forms">
                 <div class="user_forms-login">
                     <h2 class="forms_title">Đăng nhập</h2>
+                    @if (Session::has('messenger'))
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                aria-label="Success:">
+                                <use xlink:href="#check-circle-fill" />
+                            </svg>
+                            <div>
+                                {{ Session::get('messenger') }}
+                                @php
+                                    Session::forget('messenger');
+                                @endphp
+                            </div>
+                        </div>
+                    @endif
                     <form class="forms_form" action="{{ route('/dang-nhap') }}" method="POST">
                         @csrf
                         <fieldset class="forms_fieldset">
@@ -34,7 +42,8 @@
                                 @if ($errors->has('password'))
                                     <span class="text-danger text-sm"> {{ $errors->first('password') }}</span>
                                 @endif
-                                <input type="password" name="password" value="{{old('password')}}" placeholder="Nhập mật khẩu" class="forms_field-input" />
+                                <input type="password" name="password" value="{{ old('password') }}"
+                                    placeholder="Nhập mật khẩu" class="forms_field-input" />
                             </div>
                         </fieldset>
                         <div class="forms_buttons">
@@ -43,25 +52,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="user_forms-signup">
-                    <h2 class="forms_title">Tạo tài khoản</h2>
-                    <form class="forms_form">
-                        <fieldset class="forms_fieldset">
-                            <div class="forms_field">
-                                <input type="text" placeholder="Full Name" class="forms_field-input" required />
-                            </div>
-                            <div class="forms_field">
-                                <input type="email" placeholder="Email" class="forms_field-input" required />
-                            </div>
-                            <div class="forms_field">
-                                <input type="password" placeholder="Password" class="forms_field-input" required />
-                            </div>
-                        </fieldset>
-                        <div class="forms_buttons">
-                            <input type="submit" value="Đăng kí" class="forms_buttons-action">
-                        </div>
-                    </form>
-                </div>
+
             </div>
         </div>
     </section>

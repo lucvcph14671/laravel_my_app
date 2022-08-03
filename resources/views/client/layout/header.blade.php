@@ -17,12 +17,11 @@
                         VN
                     </a>
 
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Contact
+                    <a href="{{route('/form-dang-ki')}}" class="flex-c-m trans-04 p-lr-25">
+                        Đăng kí
                     </a>
-
-                    <a href="{{route('/dang-nhap/dang-ki')}}" class="flex-c-m trans-04 p-lr-25">
-                        Đăng Nhập/Đăng kí
+                    <a href="{{route('/form-dang-nhap')}}" class="flex-c-m trans-04 p-lr-25">
+                        Đăng nhập
                     </a>
                 </div>
             </div>
