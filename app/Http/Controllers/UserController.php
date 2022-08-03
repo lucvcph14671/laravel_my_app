@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddUserRequest;
+use App\Http\Requests\UpdatePassRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -91,5 +94,39 @@ class UserController extends Controller
             'user_role1' => User::all()->where('role', 1),
             'user_role0' => User::all()->where('role', 0),
         ]);
+    }
+
+
+    //Dổi mật khẩu
+
+    public function updatePass(UpdatePassRequest $request, $id)
+    {
+
+    }
+
+
+    //Upate thông tin tài khoản
+
+    public function updateUser(UpdateUserRequest $request, $id)
+    {
+        $user = User::find($id);
+        $user->fill($request->all());
+
+        if($request->hasFile('image')) {
+            $user->image = $this->saveFile(
+                $request->image,
+                $request->title,
+                'images'
+            );
+            $this->deleteFile($user->image);
+            
+        }else{
+ 
+            $user->image = $user->image;
+    
+        }
+
+        $user->save();
+        return redirect()->route('admin.user.profile')->with('messenger','Thay đổi thành công.');
     }
 }

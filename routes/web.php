@@ -34,6 +34,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('list-user', [UserController::class, 'listUser'])->name('list-user');
+        Route::put('update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
+        Route::put('update-password/{id}', [UserController::class, 'updatePass'])->name('update-password');
 
     });
 
