@@ -13,7 +13,7 @@ class UpdatePassRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,6 +26,7 @@ class UpdatePassRequest extends FormRequest
         
         return [
 
+            'passwordold' => 'required|min:6|',
             'password' => 'required|min:6|confirmed',
         ];
 
@@ -34,9 +35,11 @@ class UpdatePassRequest extends FormRequest
     public function messages()
     {
         return [
+            'passwordold.required' => 'Điền mật khẩu cũ !',
+            'passwordold.min' => 'Mật khẩu cũ tối thiểu 6 kí tự !',
             'password.required' => 'Điền mật khẩu !',
             'password.min' => 'Mật khẩu tối thiểu 6 kí tự !',
-            'password.confirmed' => 'Mật khẩu khoong khớp !',
+            'password.confirmed' => 'Mật khẩu không khớp !',
         ];
     }
 }

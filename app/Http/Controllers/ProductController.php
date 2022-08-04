@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\CategoryProduct;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductDetail;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -107,12 +108,13 @@ class ProductController extends Controller
     // Thêm mới sản phẩm 
     public function addProduct(ProductRequest $request)
     {
+
         $product = new Product();
         $product->fill($request->all());
         
         if($request->hasFile('thumbnail'))
         {
-            $product->image = $this->saveFile(
+            $product->thumbnail = $this->saveFile(
                 $request->thumbnail,
                 $request->name,
                 'images'
@@ -120,19 +122,38 @@ class ProductController extends Controller
 
         }
 
-        if($request->hasFile('images[]')) {
-            foreach($request->file('images[]') as $image)
-            {
-                $product->image = $this->saveFile(
-                    $request->images,
-                    $request->name,
-                    'images'
-                );
-            }
+        // if($request->hasFile('images[]')) {
+        //     foreach($request->file('images[]') as $image)
+        //     {
+        //         $product->image = $this->saveFile(
+        //             $request->images,
+        //             $request->name,
+        //             'images'
+        //         );
+        //     }
             
-        }
+        // }
 
         $product->save();
+        
+        foreach ($request->id_size as $value) 
+        {
+            ProductDetail::create([
+                'id_product' => $product->id,
+                'id_type' => $value,
+                'type' => 'size',
+            ]);
+        }
+
+        foreach ($request->id_color as $value) 
+        {
+            ProductDetail::create([
+                'id_product' => $product->id,
+                'id_type' => $value,
+                'type' => 'color',
+            ]);
+        }
+
         return redirect()->route('admin.product.list-product');
     }
 }

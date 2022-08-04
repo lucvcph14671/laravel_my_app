@@ -60,7 +60,7 @@
                                 @foreach ($color as $item)
                                     @if ($item->status === 1)
                                         <label class="form-check">
-                                            <input class="form-check-input" name="id_color" type="checkbox"
+                                            <input class="form-check-input" name="id_color[]" type="checkbox"
                                                 value="{{ $item->id }}">
                                             <span class="form-check-label me-2" style="color: {{ $item->color_code }};">
                                                 {{ $item->name }}
@@ -85,7 +85,7 @@
                                 @foreach ($size as $item)
                                     @if ($item->status === 1)
                                         <label class="form-check">
-                                            <input class="form-check-input" name="id_size" type="checkbox"
+                                            <input class="form-check-input" name="id_size[]" type="checkbox"
                                                 value="{{ $item->id }}">
                                             <span class="form-check-label">
                                                 {{ $item->name }}
@@ -132,14 +132,14 @@
                             <h5 class="card-title mb-0">Danh mục</h5>
                         </div>
                         <div class="card-body">
-                            <select class="form-select mb-3" name="id_category">
+                            <select class="form-select mb-3" name="id_category_products">
                                 <option value="">Chọn danh mục</option>
                                 @foreach ($categoryProduct as $item)
                                     <option value="{{ $item->id }}">{{ $item->title }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('id_category'))
-                            <span class="text-danger text-sm"> {{ $errors->first('id_category') }}</span>
+                            @if ($errors->has('id_category_products'))
+                            <span class="text-danger text-sm"> {{ $errors->first('id_category_products') }}</span>
                         @endif
                         </div>
                         

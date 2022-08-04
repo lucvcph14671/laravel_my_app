@@ -87,26 +87,35 @@
         </div>
         <hr class="my-0" />
         <div class="card-body">
-            <form action="{{route('admin.user.update-password',Auth::user()->id)}}" method="post">
+            <form action="{{ route('admin.user.update-password', Auth::user()->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <h5 class="h6 card-title">Đổi mật khẩu</h5>
+                @if (Session::has('error'))
+                    <span class="text-danger text-sm ml-3">
+                        {{ Session::get('error') }}
+                        @php
+                            Session::forget('error');
+                        @endphp
+                    </span>
+                @endif
                 <div class="d-flex">
                     <div class="card-body">
-                        <input type="password" name="passwordold" class="form-control" placeholder="Mật khẩu cũ">
+                        <input type="password" name="passwordold" value="{{ old('passwordold') }}" class="form-control"
+                            placeholder="Mật khẩu cũ">
                         @if ($errors->has('passwordold'))
                             <span class="text-danger text-sm"> {{ $errors->first('passwordold') }}</span>
                         @endif
                     </div>
                     <div class="card-body">
-                        <input type="text" name="password" class="form-control" 
+                        <input type="text" name="password" value="{{ old('password') }}" class="form-control"
                             placeholder="Mật khẩu mới">
-                        @if ($errors->has('passwordnew'))
-                            <span class="text-danger text-sm"> {{ $errors->first('passwordnew') }}</span>
+                        @if ($errors->has('password'))
+                            <span class="text-danger text-sm"> {{ $errors->first('password') }}</span>
                         @endif
                     </div>
                     <div class="card-body">
-                        <input type="text" name="password" class="form-control" 
+                        <input type="text" name="password_confirmation" class="form-control"
                             placeholder="Nhập mật khẩu mới">
                         @if ($errors->has('password'))
                             <span class="text-danger text-sm"> {{ $errors->first('password') }}</span>

@@ -7,6 +7,8 @@ use App\Http\Requests\UpdatePassRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -89,11 +91,13 @@ class UserController extends Controller
 
     public function listUser()
     {
-        return view('admin.user.listUser', 
-        [
-            'user_role1' => User::all()->where('role', 1),
-            'user_role0' => User::all()->where('role', 0),
-        ]);
+        return view(
+            'admin.user.listUser',
+            [
+                'user_role1' => User::all()->where('role', 1),
+                'user_role0' => User::all()->where('role', 0),
+            ]
+        );
     }
 
 
@@ -101,7 +105,29 @@ class UserController extends Controller
 
     public function updatePass(UpdatePassRequest $request, $id)
     {
+        $hashedPassword = Hash::make(Auth::user()->password);
 
+        if (Hash::check($request->passwordold, $hashedPassword)) {
+
+            return redirect()->back()->with('error', 'Mật khẩu cũ không khớp!');
+
+        } else {
+
+            dd($hashedPassword);
+            if (!Hash::check($request->password, $hashedPassword)) {
+
+                return redirect()->back()->with('error', 'Mật khẩu mới không thể giống mật khẩu cũ!');
+
+            } else {
+
+                $users = User::find(Auth::user()->id);
+                $users->password = bcrypt($request->password);
+
+                User::where('id', Auth::user()->id)->update(array('password' =>  $users->password));
+
+                return redirect()->back()->with('messager', 'Đổi mật khẩu thành công');
+            }
+        }
     }
 
 
@@ -112,21 +138,19 @@ class UserController extends Controller
         $user = User::find($id);
         $user->fill($request->all());
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $user->image = $this->saveFile(
                 $request->image,
                 $request->title,
                 'images'
             );
             $this->deleteFile($user->image);
-            
-        }else{
- 
+        } else {
+
             $user->image = $user->image;
-    
         }
 
         $user->save();
-        return redirect()->route('admin.user.profile')->with('messenger','Thay đổi thành công.');
+        return redirect()->route('admin.user.profile')->with('messenger', 'Thay đổi thành công.');
     }
 }
