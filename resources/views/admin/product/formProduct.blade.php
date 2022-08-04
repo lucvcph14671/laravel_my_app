@@ -160,7 +160,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Ảnh chi tiết</label>
-                                <input type="file" name="images[]" class="form-control" accept="image/*" multiple>
+                                <input type="file" name="images[]" class="form-control"  multiple>
                                 @if ($errors->has('images'))
                                     <span class="text-danger text-sm"> {{ $errors->first('images[]') }}</span>
                                 @endif

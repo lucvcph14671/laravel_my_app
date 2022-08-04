@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('image_products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('id_product');
+            $table->string('images');
             $table->timestamps();
         });
     }

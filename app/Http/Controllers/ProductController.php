@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\CategoryProduct;
 use App\Models\Color;
+use App\Models\ImageProduct;
 use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Size;
@@ -106,38 +107,46 @@ class ProductController extends Controller
     }
 
     // Thêm mới sản phẩm 
-    public function addProduct(ProductRequest $request)
+    public function addProduct(Request $request)
     {
-
+        // foreach ($request->images as $value) {
+        //     dd($value->hashName());
+        // }
         $product = new Product();
-        $product->fill($request->all());
         
-        if($request->hasFile('thumbnail'))
-        {
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->id_category_products = $request->id_category_products;
+        $product->price = $request->price;
+        $product->status = $request->status;
+        $product->desc = $request->desc;
+
+        if ($request->hasFile('thumbnail')) {
             $product->thumbnail = $this->saveFile(
                 $request->thumbnail,
                 $request->name,
                 'images'
             );
-
         }
 
-        // if($request->hasFile('images[]')) {
-        //     foreach($request->file('images[]') as $image)
-        //     {
-        //         $product->image = $this->saveFile(
-        //             $request->images,
-        //             $request->name,
-        //             'images'
-        //         );
-        //     }
-            
-        // }
-
         $product->save();
-        
-        foreach ($request->id_size as $value) 
-        {
+        if ($request->hasFile('images')) {
+        foreach ($request->images as $value) {
+
+            $image = $this->saveFile(
+                $value,
+                $product->name,
+                'images'
+            );
+
+            ImageProduct::create([
+                'id_product' => $product->id,
+                'images' => $image,
+            ]);
+        }
+        }
+
+        foreach ($request->id_size as $value) {
             ProductDetail::create([
                 'id_product' => $product->id,
                 'id_type' => $value,
@@ -145,8 +154,7 @@ class ProductController extends Controller
             ]);
         }
 
-        foreach ($request->id_color as $value) 
-        {
+        foreach ($request->id_color as $value) {
             ProductDetail::create([
                 'id_product' => $product->id,
                 'id_type' => $value,
