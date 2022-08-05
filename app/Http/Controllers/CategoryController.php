@@ -95,7 +95,7 @@ class CategoryController extends Controller
 
             if( CategoryProduct::destroy($id) ){
 
-                return back();
+                return redirect()->route('admin.category.form-category')->with('messenger','Xóa danh mục thành công.');
             }
             
         }
@@ -134,7 +134,7 @@ class CategoryController extends Controller
                 $request->title,
                 'images'
             );
-            $this->deleteFile($category);
+            $this->deleteFile(CategoryProduct::find($id));
             
         }else{
  
@@ -143,6 +143,6 @@ class CategoryController extends Controller
         }
 
         $category->save();
-        return redirect()->route('admin.category.form-category');
+        return redirect()->route('admin.category.form-category')->with('messenger','Thay đổi thành công.');
     }
 }

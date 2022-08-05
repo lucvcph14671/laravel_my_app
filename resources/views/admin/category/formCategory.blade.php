@@ -8,6 +8,19 @@
             <a class="badge bg-dark text-white ms-2" href="{{ route('admin.category.form-category') }}">
                 Thêm mới Danh mục
             </a>
+            @if (Session::has('messenger'))
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div>
+                    {{ Session::get('messenger') }}
+                    @php
+                        Session::forget('messenger');
+                    @endphp
+                </div>
+            </div>
+        @endif
         </div>
         <div class="row">
             <div class="col-12 col-lg-6">
@@ -74,7 +87,7 @@
                         </div>
 
                     </div>
-                    <button class="btn btn-info" type="submit">Thêm ngay</button>
+                    <button class="btn btn-info" type="submit">Lưu</button>
                 </form>
             </div>
 

@@ -85,14 +85,38 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($id) {
+
+            $link_forder = glob('images/product' . $id . '/*');
+
+            foreach ($link_forder as $file) { // Lặp lại để xóa
+                
+                if (is_file($file)){
+
+                    unlink($file); // xóa
+                   
+                }
+                    
+            }
+            rmdir('images/product'.$id); // xóa foder rỗng
+
+            $this->deleteImg(Product::find($id));
+
+            Product::destroy($id);
+            ProductDetail::where('id_product', $id)->delete();
+            ImageProduct::where('id_product', $id)->delete();
+
+            return redirect()->route('admin.product.list-product')->with('messenger', 'Xóa thành công');
+        }
     }
 
     /// Admin quản lí
 
     public function listProduct()
     {
-        return view('admin.product.listProduct', []);
+        return view('admin.product.listProduct', [
+            'product' => Product::select('*')->with(['categoryList'])->paginate(10),
+        ]);
     }
 
 
@@ -107,19 +131,17 @@ class ProductController extends Controller
     }
 
     // Thêm mới sản phẩm 
-    public function addProduct(Request $request)
+    public function addProduct(ProductRequest $request)
     {
-        // foreach ($request->images as $value) {
-        //     dd($value->hashName());
-        // }
         $product = new Product();
-        
+
         $product->name = $request->name;
         $product->quantity = $request->quantity;
         $product->id_category_products = $request->id_category_products;
         $product->price = $request->price;
         $product->status = $request->status;
         $product->desc = $request->desc;
+        $product->images = count($request->images);
 
         if ($request->hasFile('thumbnail')) {
             $product->thumbnail = $this->saveFile(
@@ -131,19 +153,19 @@ class ProductController extends Controller
 
         $product->save();
         if ($request->hasFile('images')) {
-        foreach ($request->images as $value) {
+            foreach ($request->images as $value) {
 
-            $image = $this->saveFile(
-                $value,
-                $product->name,
-                'images'
-            );
+                $image = $this->saveFile(
+                    $value,
+                    $product->name,
+                    'images/product' . $product->id
+                );
 
-            ImageProduct::create([
-                'id_product' => $product->id,
-                'images' => $image,
-            ]);
-        }
+                ImageProduct::create([
+                    'id_product' => $product->id,
+                    'images' => $image,
+                ]);
+            }
         }
 
         foreach ($request->id_size as $value) {
@@ -162,6 +184,6 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.product.list-product');
+        return redirect()->route('admin.product.list-product')->with('messenger', 'Thêm mới sản phẩm thành công.');
     }
 }

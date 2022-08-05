@@ -46,11 +46,23 @@
                                     placeholder="Nhập mật khẩu" class="forms_field-input" />
                             </div>
                         </fieldset>
-                        <div class="forms_buttons">
+                        <div class="forms_buttons mb-5">
                             <button type="button" class="forms_buttons-forgot">Quên mật khẩu?</button>
                             <input type="submit" value="Đăng nhập" class="forms_buttons-action">
                         </div>
                     </form>
+                    <hr>
+                    <div class="d-flex flex-column">
+                        <a href="#" class="fb btn btn-primary my-2 mt-5">
+                          <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                        </a>
+                        <a href="#" class="twitter btn btn-info">
+                          <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+                        </a>
+                        <a href="#" class="google btn btn-danger my-2">
+                          <i class="fa fa-google fa-fw"></i> Login with Google+
+                        </a>
+                      </div>
                 </div>
 
             </div>

@@ -25,13 +25,42 @@ class Controller extends BaseController
 
     // Xóa ảnh 
 
-    public function deleteFile($imageCaytegory){
+    public function deleteFile($imageCaytegory)
+    {
 
         $urlLink = $imageCaytegory->image;
 
-        if(file_exists($urlLink)){
+        if (file_exists($urlLink)) {
 
-           return unlink($urlLink);
+            return unlink($urlLink);
         }
     }
+
+    // xóa list ảnh product
+    public function deleteFiles($count_img, $image_db)
+    {
+
+
+        for ($i = 0; $i > $count_img; $i++) {
+
+            $urlLink = $image_db->images;
+            dd($urlLink);
+            if (file_exists($urlLink)) {
+
+                return unlink($urlLink);
+            }
+        }
+    }
+
+    public function deleteImg($imageCaytegory)
+    {
+
+        $urlLink = $imageCaytegory->thumbnail;
+
+        if (file_exists($urlLink)) {
+
+            return unlink($urlLink);
+        }
+    }
+
 }
