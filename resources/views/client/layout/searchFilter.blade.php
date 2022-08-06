@@ -17,25 +17,15 @@
                             <div class="mtext-102 cl2 p-b-15">
                                 Danh mục
                             </div>
-
+                           
                             <ul>
+                                @foreach ($categories as $filter)
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Tủ
+                                        {{ $filter->title }}
                                     </a>
                                 </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Giường
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Ghế
-                                    </a>
-                                </li>
+                                @endforeach
 
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04 filter-link-active">

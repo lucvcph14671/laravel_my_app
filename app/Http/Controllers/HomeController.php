@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +17,8 @@ class HomeController extends Controller
     {
         // Trang chủ
         return view('client.products.homeProduct', [
-
+            'categories' => CategoryProduct::orderBy('created_at', 'desc')->limit(3)->get(),
+            'products' => Product::paginate(4),
         ]);
     }
 
