@@ -4,12 +4,12 @@
     <!-- breadcrumb -->
     <div class="container m-t-80">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-            <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+            <a href="{{ route('/') }}" class="stext-109 cl8 hov-cl1 trans-04">
                 Trang chủ
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
 
-            <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+            <a href="{{ route('san-pham') }}" class="stext-109 cl8 hov-cl1 trans-04">
                 Sả phẩm
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
@@ -32,26 +32,19 @@
                             <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                             <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg" alt="IMG-PRODUCT">
+                                @foreach ($imagesAll as $image)
+                                    <div class="item-slick3" data-thumb="{{ asset($image->images) }}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img src="{{ asset($image->images) }}" alt="IMG-PRODUCT" width="471"
+                                                height="311">
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                href="{{ asset($image->images) }}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="item-slick3" data-thumb="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                            href="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -60,16 +53,15 @@
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
                         <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            SP test 1
+                            {{ $productDetail->name }}
                         </h4>
 
-                        <span class="mtext-106 cl2">
-                            58.790.000đ
+                        <span class="mtext-106 cl2 text-danger">
+                            {{ number_format($productDetail->price) }} VNĐ
                         </span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Mô tả: Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-                            feugiat.
+                            Danh mục: <span class="text-info">{{ $productDetail->category->title }}</span>
                         </p>
 
                         <!--  -->
@@ -81,12 +73,10 @@
 
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
+                                        <select class="js-select2" name="size">
+                                            @foreach ($sizes as $size)
+                                                <option value="{{ $size->id }}">{{ $size->size_name->name }}</option>
+                                            @endforeach
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -100,12 +90,10 @@
 
                                 <div class="size-204 respon6-next">
                                     <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
+                                        <select class="js-select2" name="color">
+                                            @foreach ($colors as $color)
+                                                <option value="{{ $color->id }}">{{ $color->color_name->name }}</option>
+                                            @endforeach
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -170,8 +158,8 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item p-b-10">
-                            <a class="nav-link active" data-toggle="tab" href="#description"
-                                role="tab">Mô tả chi tiết</a>
+                            <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Mô tả chi
+                                tiết</a>
                         </li>
 
                         <li class="nav-item p-b-10">
@@ -181,7 +169,8 @@
                         </li>
 
                         <li class="nav-item p-b-10">
-                            <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Đánh giá - Nhận xét (1)</a>
+                            <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Đánh giá - Nhận xét
+                                (1)</a>
                         </li>
                     </ul>
 
@@ -191,7 +180,7 @@
                         <div class="tab-pane fade show active" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
                                 <p class="stext-102 cl6">
-                                    Chưa có.
+                                    {{ $productDetail->desc }}
                                 </p>
                             </div>
                         </div>
@@ -203,7 +192,7 @@
                                     <ul class="p-lr-28 p-lr-15-sm">
                                         <li class="flex-w flex-t p-b-7">
                                             <span class="stext-102 cl3 size-205">
-                                                Cân Nặng
+                                                Danh mục
                                             </span>
 
                                             <span class="stext-102 cl6 size-206">
@@ -263,7 +252,7 @@
                                         <!-- Review -->
                                         <div class="flex-w flex-t p-b-68">
                                             <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                <img src="{{asset('client/images/avatar-01.jpg')}}" alt="AVATAR">
+                                                <img src="{{ asset('client/images/avatar-01.jpg') }}" alt="AVATAR">
                                             </div>
 
                                             <div class="size-207">
@@ -295,7 +284,8 @@
                                             </h5>
 
                                             <p class="stext-102 cl6">
-                                                Địa chỉ email của bạn sẽ không được công bố. Các trường bắt buộc được đánh dấu *
+                                                Địa chỉ email của bạn sẽ không được công bố. Các trường bắt buộc được đánh
+                                                dấu *
                                             </p>
 
                                             <div class="flex-w flex-m p-t-50 p-b-23">
@@ -374,7 +364,8 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
-                                <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg" alt="IMG-PRODUCT">
+                                <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg"
+                                    alt="IMG-PRODUCT">
 
                                 <a href="#"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -395,10 +386,10 @@
 
                                 <div class="block2-txt-child2 flex-r p-t-3">
                                     <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                        <img class="icon-heart1 dis-block trans-04" src="{{asset('client/images/icons/icon-heart-01.png')}}"
-                                            alt="ICON">
+                                        <img class="icon-heart1 dis-block trans-04"
+                                            src="{{ asset('client/images/icons/icon-heart-01.png') }}" alt="ICON">
                                         <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                            src="{{asset('client/images/icons/icon-heart-02.png')}}" alt="ICON">
+                                            src="{{ asset('client/images/icons/icon-heart-02.png') }}" alt="ICON">
                                     </a>
                                 </div>
                             </div>
@@ -409,6 +400,4 @@
             </div>
         </div>
     </section>
-    <!-- Show Product Quick view -->
-    @include('client/products/showProduct')
 @endsection

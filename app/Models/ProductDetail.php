@@ -16,4 +16,11 @@ class ProductDetail extends Model
         'type',
 
     ];
+
+    public function size_name(){
+        return $this->belongsTo(Size::class,'id_type','id')->select('name');
+    }
+    public function color_name(){
+        return $this->belongsTo(Color::class,'id_type','id')->select('name');
+    }
 }

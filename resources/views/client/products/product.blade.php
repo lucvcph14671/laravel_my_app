@@ -11,9 +11,9 @@
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
                     Tất cả sản phẩm
                 </button>
-                @foreach ($categories as $category)
-                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{$category->id}}">
-                        {{$category->title}}
+                @foreach ($categoriesAll as $categoryAll)
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{$categoryAll->id}}">
+                        {{$categoryAll->title}}
                     </button>
                 @endforeach
             </div>
@@ -45,15 +45,14 @@
                         <img src="{{$product->thumbnail}}"
                             alt="IMG-PRODUCT" width="233" height="233">
 
-                        <a href="#"
-                            class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Xem Ngay
+                        <a href="{{$product->thumbnail}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            Mua Ngay
                         </a>
                     </div>
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
-                            <a href="{{ route('san-pham-chi-tiet') }}"
+                            <a href="{{ route('san-pham-chi-tiet',$product->id) }}"
                                 class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                 {{$product->name}}
                             </a>
@@ -88,5 +87,4 @@
 <!-- Blog -->
 @include('client/blog/blogIndex')
 
-<!-- Show Product Quick view -->
-@include('client/products/showProduct')
+

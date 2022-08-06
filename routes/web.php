@@ -87,7 +87,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('san-pham', [HomeController::class, 'product'])->name('san-pham');
 
-    Route::get('san-pham-chi-tiet', [HomeController::class, 'productDetail'])->name('san-pham-chi-tiet');
+    Route::get('san-pham-chi-tiet/{id}', [HomeController::class, 'productDetail'])->name('san-pham-chi-tiet');
 
     Route::get('gio-hang', [CartController::class, 'cart'])->name('gio-hang');
 

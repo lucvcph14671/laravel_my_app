@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryProduct;
+use App\Models\Color;
+use App\Models\ImageProduct;
 use App\Models\Product;
+use App\Models\ProductDetail;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,7 +22,8 @@ class HomeController extends Controller
         // Trang chủ
         return view('client.products.homeProduct', [
             'categories' => CategoryProduct::orderBy('created_at', 'desc')->limit(3)->get(),
-            'products' => Product::paginate(4),
+            'categoriesAll' => CategoryProduct::all(),
+            'products' => Product::paginate(8),
         ]);
     }
 
@@ -26,15 +31,20 @@ class HomeController extends Controller
     {
         // Trang sản phẩm
         return view('client.products.listProduct', [
-
+            'categories' => CategoryProduct::orderBy('created_at', 'desc')->limit(3)->get(),
+            'categoriesAll' => CategoryProduct::all(),
+            'products' => Product::paginate(8),
         ]);
     }
     
-    public function productDetail() {
+    public function productDetail($id) {
 
         //trang sản phảm chi tiet
         return view('client.products.detailProduct', [
-
+            'productDetail' => Product::find($id),
+            'imagesAll' => ImageProduct::where('id_product', $id)->get(),
+            'sizes' => ProductDetail::where('id_product', $id)->where('type','size')->get(),
+            'colors' => ProductDetail::where('id_product', $id)->where('type','color')->get(),
         ]);
 
     }

@@ -19,7 +19,7 @@
                             </div>
                            
                             <ul>
-                                @foreach ($categories as $filter)
+                                @foreach ($categoriesAll as $filter)
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
                                         {{ $filter->title }}
