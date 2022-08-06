@@ -108,9 +108,9 @@
                                         <div class="modal-body">
                                             <table class="table table-light">
                                                 <tbody>
-                                                    @foreach ($item->categoryList as $item)
+                                                    @foreach ($item->categoryList as $image)
                                                         <div class="row d-flex">
-                                                            <img src="{{ asset($item->images) }}" alt="img"
+                                                            <img src="{{ asset($image->images) }}" alt="img"
                                                                 width="100">
                                                         </div>
                                                     @endforeach
@@ -134,7 +134,8 @@
                                     Xóa
                                 </button>
                             </form>
-                            <span class="badge bg-info">Sửa</span>
+                            <a class="badge bg-success border border-success text-decoration-none"
+                                            href="{{ route('admin.product.edit-product', $item->id) }}">Sửa</a>
                         </td>
                     </tr>
                 @endforeach

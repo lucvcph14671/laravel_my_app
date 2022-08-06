@@ -33,4 +33,12 @@ class Product extends Model
     public function categoryList(){
         return $this->hasMany(ImageProduct::class,'id_product','id');
     }
+    public function size_type(){
+        return $this->hasMany(ProductDetail::class,'id_product','id')->select('id_type')->where('type','size');
+    }
+    public function color_type(){
+        return $this->hasMany(ProductDetail::class,'id_product','id')->select('id_type')->where('type','color');
+    }
+
+
 }

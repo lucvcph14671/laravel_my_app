@@ -54,6 +54,8 @@ class ProductController extends Controller
         //
     }
 
+        /// Admin quản lí
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -61,8 +63,15 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $product = Product::find($id);
+        
+        return view('admin.product.formEdit',[
+            'size' => Size::all(),
+            'color' => Color::all(),
+            'categoryProduct' => CategoryProduct::all(),
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -74,7 +83,78 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->id_category_products = $request->id_category_products;
+        $product->price = $request->price;
+        $product->status = $request->status;
+        $product->desc = $request->desc;
+        
+
+        if ($request->hasFile('thumbnail')) {
+            $product->thumbnail = $this->saveFile(
+                $request->thumbnail,
+                $request->name,
+                'images'
+            );
+            $this->deleteImg(Product::find($id));
+        }
+
+        if ($request->hasFile('images')) {
+
+            $link_forder = glob('images/product' . $id . '/*');
+
+            foreach ($link_forder as $file) { // Lặp lại để xóa
+                
+                if (is_file($file)){
+
+                    unlink($file); // xóa
+                   
+                }
+                    
+            }
+            rmdir('images/product'.$id); // xóa foder rỗng
+            ImageProduct::where('id_product', $id)->delete();
+
+            
+            foreach ($request->images as $value) {
+
+                $image = $this->saveFile(
+                    $value,
+                    $product->name,
+                    'images/product' . $product->id
+                );
+
+                ImageProduct::create([
+                    'id_product' => $product->id,
+                    'images' => $image,
+                ]);
+            }
+            $product->images = count($request->images);
+        }
+
+        $product->save();
+        
+        ProductDetail::where('id_product', $id)->delete();
+        foreach ($request->id_size as $value) {
+            ProductDetail::create([
+                'id_product' => $product->id,
+                'id_type' => $value,
+                'type' => 'size',
+            ]);
+        }
+
+        foreach ($request->id_color as $value) {
+            ProductDetail::create([
+                'id_product' => $product->id,
+                'id_type' => $value,
+                'type' => 'color',
+            ]);
+        }
+
+        return redirect()->route('admin.product.list-product')->with('messenger', 'Update sản phẩm thành công.');
     }
 
     /**
@@ -115,7 +195,7 @@ class ProductController extends Controller
     public function listProduct()
     {
         return view('admin.product.listProduct', [
-            'product' => Product::select('*')->with(['categoryList'])->paginate(10),
+            'product' => Product::paginate(10),
         ]);
     }
 
