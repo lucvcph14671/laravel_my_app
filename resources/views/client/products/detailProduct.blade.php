@@ -61,7 +61,16 @@
                         </span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            Danh mục: <span class="text-info">{{ $productDetail->category->title }}</span>
+                            Danh mục : <span class="text-info">{{ $productDetail->category->title }}</span>
+                        </p>
+
+                        <p class="stext-102 cl3 p-t-23">
+                            Tình trạng :
+                            @if ($productDetail->quantity < 1)
+                                <span class="text-danger">Hết hàng</span>
+                            @else
+                                <span class="text-success">Còn hàng</span>
+                            @endif
                         </p>
 
                         <!--  -->
@@ -92,7 +101,8 @@
                                     <div class="rs1-select2 bor8 bg0">
                                         <select class="js-select2" name="color">
                                             @foreach ($colors as $color)
-                                                <option value="{{ $color->id }}">{{ $color->color_name->name }}</option>
+                                                <option value="{{ $color->id }}">{{ $color->color_name->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         <div class="dropDownSelect2"></div>
@@ -115,10 +125,10 @@
                                         </div>
                                     </div>
 
-                                    <button
+                                    <a onclick="addCart1({{ $productDetail->id }})" href="javascript:"
                                         class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                         Thêm giỏ hàng
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +180,7 @@
 
                         <li class="nav-item p-b-10">
                             <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Đánh giá - Nhận xét
-                                (1)</a>
+                                ({{$commentCount}})</a>
                         </li>
                     </ul>
 
@@ -250,35 +260,38 @@
                                 <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                     <div class="p-b-30 m-lr-15-sm">
                                         <!-- Review -->
-                                        <div class="flex-w flex-t p-b-68">
-                                            <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                <img src="{{ asset('client/images/avatar-01.jpg') }}" alt="AVATAR">
-                                            </div>
-
-                                            <div class="size-207">
-                                                <div class="flex-w flex-sb-m p-b-17">
-                                                    <span class="mtext-107 cl2 p-r-20">
-                                                        Lực 8 ngón
-                                                    </span>
-
-                                                    <span class="fs-18 cl11">
-                                                        <i class="zmdi zmdi-star"></i>
-                                                        <i class="zmdi zmdi-star"></i>
-                                                        <i class="zmdi zmdi-star"></i>
-                                                        <i class="zmdi zmdi-star"></i>
-                                                        <i class="zmdi zmdi-star-half"></i>
-                                                    </span>
+                                        @foreach ($comments as $comment)
+                                            <div class="flex-w flex-t p-b-68">
+                                                <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+                                                    <img src="https://www.doylemahon.ie/wp-content/uploads/2019/11/Man-Gentleman-Avatar-Silhouette-Free-Vector-Graphi-3774.jpg" alt="AVATAR">
                                                 </div>
 
-                                                <p class="stext-102 cl6">
-                                                    Quod autem in homine praestantissimum atque optimum est, id deseruit.
-                                                    Apud ceteros autem philosophos
-                                                </p>
+                                                <div class="size-207">
+                                                    <div class="flex-w flex-sb-m p-b-17">
+                                                        <span class="mtext-107 cl2 p-r-20">
+                                                            {{$comment->name}}
+                                                        </span>
+
+                                                        <span class="fs-18 cl11">
+                                                            <i class="zmdi zmdi-star"></i>
+                                                            <i class="zmdi zmdi-star"></i>
+                                                            <i class="zmdi zmdi-star"></i>
+                                                            <i class="zmdi zmdi-star"></i>
+                                                            <i class="zmdi zmdi-star-half"></i>
+                                                        </span>
+                                                    </div>
+
+                                                    <p class="stext-102 cl6">
+                                                        {{$comment->content}}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
+
 
                                         <!-- Add review -->
-                                        <form class="w-full">
+                                        <form class="w-full" action="{{ route('comment.add-comment') }}" method="POST">
+                                            @csrf
                                             <h5 class="mtext-108 cl2 p-b-7">
                                                 Đánh giá của bạn
                                             </h5>
@@ -302,23 +315,35 @@
                                                     <input class="dis-none" type="number" name="rating">
                                                 </span>
                                             </div>
-
+                                            <input type="hidden" value="{{ $productDetail->id }}" name="id_product">
                                             <div class="row p-b-25">
                                                 <div class="col-12 p-b-5">
                                                     <label class="stext-102 cl3" for="review">Đánh giá của bạn</label>
-                                                    <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                                    <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="content"></textarea>
+                                                    @if ($errors->has('content'))
+                                                        <span class="text-danger text-sm">
+                                                            {{ $errors->first('content') }}</span>
+                                                    @endif
                                                 </div>
 
                                                 <div class="col-sm-6 p-b-5">
                                                     <label class="stext-102 cl3" for="name">Họ và tên</label>
                                                     <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name"
                                                         type="text" name="name">
+                                                    @if ($errors->has('name'))
+                                                        <span class="text-danger text-sm">
+                                                            {{ $errors->first('name') }}</span>
+                                                    @endif
                                                 </div>
 
                                                 <div class="col-sm-6 p-b-5">
                                                     <label class="stext-102 cl3" for="email">Email</label>
                                                     <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email"
                                                         type="text" name="email">
+                                                    @if ($errors->has('email'))
+                                                        <span class="text-danger text-sm">
+                                                            {{ $errors->first('email') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -338,11 +363,7 @@
 
         <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
             <span class="stext-107 cl6 p-lr-25">
-                Mã: JAK-01
-            </span>
-
-            <span class="stext-107 cl6 p-lr-25">
-                Danh mục: Tủ quần áo
+                Mã: Luc-{{ $productDetail->id }}
             </span>
         </div>
     </section>
@@ -360,42 +381,46 @@
             <!-- Slide2 -->
             <div class="wrap-slick2">
                 <div class="slick2">
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="https://galaxycentre.vn/uploads/haravan/ban-an-hien-dai-nhap-khau-8a6129612a2c41ddb16c8af1e4b6d188-csivv.jpg"
-                                    alt="IMG-PRODUCT">
+                    @foreach ($productRelate as $relate)
+                        <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-pic hov-img0">
+                                    <img src="{{ asset($relate->thumbnail) }}" alt="IMG-PRODUCT" width="270"
+                                        height="150">
 
-                                <a href="#"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Xem ngay
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Esprit Ruffle Shirt
+                                    <a href="{{ route('san-pham-chi-tiet', $relate->id) }}"
+                                        class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                        Xem ngay
                                     </a>
-
-                                    <span class="stext-105 cl3">
-                                        16.640.000đ
-                                    </span>
                                 </div>
 
-                                <div class="block2-txt-child2 flex-r p-t-3">
-                                    <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                        <img class="icon-heart1 dis-block trans-04"
-                                            src="{{ asset('client/images/icons/icon-heart-01.png') }}" alt="ICON">
-                                        <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                            src="{{ asset('client/images/icons/icon-heart-02.png') }}" alt="ICON">
-                                    </a>
+                                <div class="block2-txt flex-w flex-t p-t-14">
+                                    <div class="block2-txt-child1 flex-col-l ">
+                                        <a href="product-detail.html"
+                                            class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                            {{ $relate->name }}
+                                        </a>
+
+                                        <span class="stext-105 cl3">
+                                            {{ number_format($relate->price) }} VNĐ
+                                        </span>
+                                    </div>
+
+                                    <div class="block2-txt-child2 flex-r p-t-3">
+                                        <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                            <img class="icon-heart1 dis-block trans-04"
+                                                src="{{ asset('client/images/icons/icon-heart-01.png') }}"
+                                                alt="ICON">
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                                src="{{ asset('client/images/icons/icon-heart-02.png') }}"
+                                                alt="ICON">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>

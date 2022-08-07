@@ -169,6 +169,17 @@
     <script>
         $(".alert").alert();
     </script>
+     <script>
+        function addCart1(id){
+           $.ajax({
+                url: '/add-gio-hang/'+id,
+                type: 'GET',
+            }).done(function(response){
+                $("#data-cart").empty();
+                $("#data-cart").html(response);
+            })
+        }
+    </script>
 </body>
 
 </html>

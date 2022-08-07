@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -40,7 +41,7 @@ class AuthController extends Controller
         return view('auth.login', []);
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -58,11 +59,11 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
- 
+
         $request->session()->invalidate();
-     
+
         $request->session()->regenerateToken();
-     
+
         return redirect()->route('/form-dang-nhap');
     }
 
@@ -81,10 +82,42 @@ class AuthController extends Controller
         $user->image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRCFgHuWIBCleFnK0U9Hytp0Q76Ygu1alwrQ&usqp=CAU';
 
         $user->save();
-        return redirect()->route('/form-dang-nhap')->with('messenger','Đăng kí tài khoản thành công.');
-        
+        return redirect()->route('/form-dang-nhap')->with('messenger', 'Đăng kí tài khoản thành công.');
     }
 
+    public function getLoginGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function loginGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        if ($googleUser) {
+            // 1. Xem xem user này đã tồn tại trong DB chưa
+            $user = User::where('email', $googleUser->email)->first();
+            // 2. Nếu tồn tại rồi thì cho đăng nhập
+            if ($user) {
+                Auth::login($user); // không cần check password vẫn cho đăng nhập vào
+                return redirect()->route('admin./');
+            }
+            // 3. Nếu không có $user thì tạo 1 bản ghi mới từ thông tin google
+            $newUser = new User();
+            $newUser->fill($googleUser->user);
+            $newUser->email = $googleUser->email;
+            $newUser->phone = '';
+        }
+    }
+
+    public function getLoginFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function loginFacebookCallBack()
+    {
+        $googleUser = Socialite::driver('facebook')->user();
+        dd($googleUser);
+    }
     /**
      * Display the specified resource.
      *
@@ -116,7 +149,6 @@ class AuthController extends Controller
      */
     public function update_status(Request $request, $id)
     {
-        
     }
 
     /**

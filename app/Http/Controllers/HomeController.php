@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryProduct;
 use App\Models\Color;
+use App\Models\Comment;
 use App\Models\ImageProduct;
 use App\Models\Product;
 use App\Models\ProductDetail;
@@ -39,9 +40,13 @@ class HomeController extends Controller
     
     public function productDetail($id) {
 
+        $productDetail = Product::find($id);
         //trang sản phảm chi tiet
         return view('client.products.detailProduct', [
-            'productDetail' => Product::find($id),
+            'productDetail' => $productDetail,
+            'commentCount' => Comment::where('id_product', $id)->get()->count(),
+            'comments' => Comment::where('id_product', $id)->get(),
+            'productRelate' => Product::where('id_category_products', $productDetail->id_category_products)->get(),
             'imagesAll' => ImageProduct::where('id_product', $id)->get(),
             'sizes' => ProductDetail::where('id_product', $id)->where('type','size')->get(),
             'colors' => ProductDetail::where('id_product', $id)->where('type','color')->get(),

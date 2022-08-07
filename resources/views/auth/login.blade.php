@@ -53,13 +53,13 @@
                     </form>
                     <hr>
                     <div class="d-flex flex-column">
-                        <a href="#" class="fb btn btn-primary my-2 mt-5">
+                        <a href="{{route('/login-facebook')}}" class="fb btn btn-primary my-2 mt-5">
                           <i class="fa fa-facebook fa-fw"></i> Login with Facebook
                         </a>
                         <a href="#" class="twitter btn btn-info">
                           <i class="fa fa-twitter fa-fw"></i> Login with Twitter
                         </a>
-                        <a href="#" class="google btn btn-danger my-2">
+                        <a href="{{route('/login-google')}}" class="google btn btn-danger my-2">
                           <i class="fa fa-google fa-fw"></i> Login with Google+
                         </a>
                       </div>
