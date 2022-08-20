@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
+use App\Models\Comment;
+use App\Models\Oder;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class dashboardController extends Controller
@@ -14,7 +19,12 @@ class dashboardController extends Controller
     public function index()
     {
         return view('admin.dashboard.analytics', [
-            
+            'categories' => CategoryProduct::all(),
+            'products' => Product::all(),
+            'usersNt' => User::where('role', 1)->get(),
+            'usersKh' => User::where('role', 0)->get(),
+            'bl' => Comment::all(),
+            'od' => Oder::all(),
         ]);
     }
 

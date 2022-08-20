@@ -15,4 +15,8 @@ class CategoryProduct extends Model
         'status',
         'image',
     ];
+
+    public function productCount(){
+        return $this->hasMany(Product::class,'id_category_products','id');
+    }
 }

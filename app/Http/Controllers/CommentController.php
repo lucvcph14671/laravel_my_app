@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -41,7 +42,7 @@ class CommentController extends Controller
         $comment = new Comment();
 
         $comment->fill($request->all());
-        $comment->id_user = $request->rating;
+        $comment->id_user = Auth::user()->id;
         $comment->save();
         return redirect()->back();
     }

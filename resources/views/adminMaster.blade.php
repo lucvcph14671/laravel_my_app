@@ -138,13 +138,15 @@
             new Chart(document.getElementById("chartjs-dashboard-pie"), {
                 type: "pie",
                 data: {
-                    labels: ["Chrome", "Firefox", "IE"],
+                    labels: ["Tủ", "Giường", "Đồng hồ", "Bàn", "Ghế"],
                     datasets: [{
-                        data: [4306, 3801, 1689],
+                        data: [10, 30, 30, 20, 55],
                         backgroundColor: [
                             window.theme.primary,
                             window.theme.warning,
-                            window.theme.danger
+                            window.theme.danger,
+                            window.theme.info,
+                            window.theme.success
                         ],
                         borderWidth: 5
                     }]

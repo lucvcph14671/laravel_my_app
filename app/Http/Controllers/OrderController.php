@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Oder;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class OrderController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.oder.list',[
+            'orers' => Oder::all(),
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.

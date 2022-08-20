@@ -106,9 +106,9 @@
                                 <td class="d-none d-xl-table-cell">{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                 <td>
                                     @if ($item->status === 1)
-                                        <span class="badge bg-info">Hiện</span>
+                                        <a class="badge bg-info" href="{{route('admin.update_status',['nametable' => 'sizes', 'id' => $item->id, 'status' => 0])}}">Hiện</a>
                                     @else
-                                        <span class="badge bg-warning">Tạm ẩn</span>
+                                        <a class="badge bg-warning" href="{{route('admin.update_status',['nametable' => 'sizes', 'id' => $item->id, 'status' => 1])}}">Tạm ẩn</a>
                                     @endif
                                 </td>
                                 <td>

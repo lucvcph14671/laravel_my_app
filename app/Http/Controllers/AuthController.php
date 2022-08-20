@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\AuthRequest;
+use App\Models\Oder;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
-class AuthController extends Controller
+class AuthController extends CartController
 {
     /**
      * Display a listing of the resource.
@@ -23,8 +25,19 @@ class AuthController extends Controller
         $password = $request->password;
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            if( Auth::user()->role == 2 )
+            {
+                return redirect()->route('admin./');
 
-            return redirect()->route('admin./');
+            }else  if( Auth::user()->role == 1 )
+            {
+                return redirect()->route('admin./');
+                
+            }else
+            {
+                return redirect()->route('/');
+            }
+            
         }
 
         return redirect()->route('/form-dang-nhap');
@@ -147,10 +160,11 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update_status(Request $request, $id)
+    public function updateStatus($nametable,$id,$status)
     {
+        DB::table($nametable)->where('id', $id)->update(['status' => $status]);
+        return redirect()->back()->with('messenger','Sửa thành công');
     }
-
     /**
      * Remove the specified resource from storage.
      *

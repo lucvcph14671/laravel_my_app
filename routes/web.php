@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\Cart;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
@@ -10,11 +9,12 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/', [dashboardController::class, 'index'])->name('/');
 
-    Route::put('update_status/{id}', [AuthController::class, 'update_status'])->name('update_status');
+    Route::any('update_status/{nametable}/{id}/{status}', [AuthController::class, 'updateStatus'])->name('update_status');
 
     Route::prefix('user')->name('user.')->group(function () {
 
@@ -85,6 +85,13 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         
     });
 
+    Route::prefix('order')->name('order.')->group(function () {
+
+        Route::get('list-order', [OrderController::class, 'index'])->name('list-order');
+        Route::put('update-order/{id}', [OrderController::class, 'update'])->name('update-order');
+        
+    });
+
     
 });
 
@@ -102,11 +109,21 @@ Route::get('san-pham-chi-tiet/{id}', [HomeController::class, 'productDetail'])->
 
 Route::get('gio-hang', [CartController::class, 'cart'])->name('gio-hang');
 
+Route::any('thanh-toan', [CartController::class, 'oder'])->name('thanh-toan');
+
+Route::any('update-quantity', [CartController::class, 'updateQuantity'])->name('update-quantity');
+
 Route::get('add-gio-hang/{id}', [CartController::class, 'addCart'])->name('add-gio-hang');
 
-Route::get('tin-tuc', [BlogController::class, 'blog'])->name('tin-tuc');
+Route::get('delete-gio-hang/{id}', [CartController::class, 'deleteCart'])->name('delete-gio-hang');
 
-Route::get('lien-he', [ContactController::class, 'contact'])->name('lien-he');
+Route::get('delete-detail-cart/{id}', [CartController::class, 'deleteListCart'])->name('delete-detail-cart');
+
+Route::get('tin-tuc', [HomeController::class, 'blog'])->name('tin-tuc');
+
+Route::any('lien-he', [HomeController::class, 'contact'])->name('lien-he');
+
+Route::any('lien-he-email', [HomeController::class, 'email'])->name('lien-he-email');
 
 Route::middleware('guest')->prefix('/')->name('/')->group(function () {
 

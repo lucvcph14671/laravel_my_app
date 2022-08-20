@@ -50,9 +50,9 @@
                         <td><span class="badge bg-primary">{{ $item->quantity }}</span></td>
                         <td>
                             @if ($item->status === 0)
-                                <span class="badge bg-info">Còn hàng</span>
+                                <a class="badge bg-info" href="{{route('admin.update_status',['nametable' => 'products', 'id' => $item->id, 'status' => 1])}}" >Còn hàng</a>
                             @else
-                                <span class="badge bg-warning">Hết hàng</span>
+                                <a class="badge bg-warning" href="{{route('admin.update_status',['nametable' => 'products', 'id' => $item->id, 'status' => 0])}}">Hết hàng</a>
                             @endif
 
                         </td>

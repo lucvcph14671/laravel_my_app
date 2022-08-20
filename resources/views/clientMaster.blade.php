@@ -170,15 +170,31 @@
         $(".alert").alert();
     </script>
      <script>
-        function addCart1(id){
+        function addCart(id){
            $.ajax({
                 url: '/add-gio-hang/'+id,
                 type: 'GET',
             }).done(function(response){
-                $("#data-cart").empty();
-                $("#data-cart").html(response);
+                renderCart(response);
             })
         }
+
+        $("#data-cart").on("click", ".delete-cart div" , function(){
+            $.ajax({
+                url: '/delete-gio-hang/'+$(this).data("id"),
+                type: 'GET',
+            }).done(function(response){
+                renderCart(response);
+            })
+        });
+
+
+        function renderCart(response){
+            $("#data-cart").empty();
+            $("#data-cart").html(response);
+            $("#number-quantity").text($("#number-quantity").val());
+        }
+
     </script>
 </body>
 

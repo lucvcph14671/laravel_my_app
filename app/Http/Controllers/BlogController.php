@@ -11,13 +11,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function blog()
-    {
-        // Trang sản phẩm
-        return view('client.blog.blogHome', [
 
-        ]);
-    }
 
     /**
      * Show the form for creating a new resource.

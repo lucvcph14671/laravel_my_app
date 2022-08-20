@@ -119,9 +119,9 @@
                                             height="92" width="100"></td>
                                     <td>
                                         @if ($item->status === 1)
-                                            <span class="badge bg-info">Hiện</span>
+                                            <a class="badge bg-info" href="{{route('admin.update_status',['nametable' => 'category_products', 'id' => $item->id, 'status' => 0])}}">Hiện</a>
                                         @else
-                                            <span class="badge bg-warning">Tạm ẩn</span>
+                                            <a class="badge bg-warning" href="{{route('admin.update_status',['nametable' => 'category_products', 'id' => $item->id, 'status' => 1])}}">Tạm ẩn</a>
                                         @endif
                                     </td>
                                     <td>

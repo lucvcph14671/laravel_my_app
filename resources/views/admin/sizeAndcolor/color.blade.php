@@ -114,14 +114,13 @@
                                         style="background: {{ $item->color_code }}">{{ $item->color_code }}</span></td>
                                 <td class="d-none d-xl-table-cell">{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                 <td>
-                                    <form action="{{route('admin.update_status',$item->id)}}" method="post">
-                                        @csrf
-                                        @if ($item->status === 1)
-                                            <button class="badge bg-info" name="status" value="{{$item->status}}">Hiện</button>
-                                        @else
-                                            <button class="badge bg-warning">Tạm ẩn</button>
-                                        @endif
-                                    </form>
+
+                                    @if ($item->status === 1)
+                                        <a class="badge bg-info"
+                                            href="{{ route('admin.update_status', ['nametable' => 'colors', 'id' => $item->id, 'status' => 0]) }}">Hiện</a>
+                                    @else
+                                        <a class="badge bg-warning" href="{{route('admin.update_status',['nametable' => 'colors', 'id' => $item->id, 'status' => 1])}}">Tạm ẩn</a>
+                                    @endif
                                 </td>
                                 <td>
                                     <form action="{{ route('admin.color.destroy-color', $item->id) }}" method="POST">

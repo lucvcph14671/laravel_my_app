@@ -10,9 +10,23 @@ use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
-class HomeController extends Controller
+class HomeController extends CartController
 {
+    public function email(Request $request)
+    {
+        // dd($request);
+        Mail::send('client.contact.contact',[
+            'name' => $request->name,
+            'msg' => $request->msg,
+        ],
+        function($mail) use($request){
+            $mail->subject('Liên hệ từ khách hàng');
+            $mail->to('3winacc5@gmail.com', $request->name);
+        });
+        return back();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +66,27 @@ class HomeController extends Controller
             'colors' => ProductDetail::where('id_product', $id)->where('type','color')->get(),
         ]);
 
+    }
+
+    public function blog()
+    {
+        // Trang bolg
+        return view('client.blog.blogHome', [
+
+        ]);
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function contact()
+    {
+        // Trang sản phẩm
+        return view('client.contact.contactHome', [
+
+        ]);
     }
     /**
      * Show the form for creating a new resource.
